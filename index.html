@@ -33,26 +33,26 @@
             console.log(dateSelect.MPDatepicker('value'));
         
         var now = moment();
-        // var dateRange = { 
-        //   from: now.subtract(12, 'hours')._d,
-        //   to: now._d,
-        //   unit: 'hour'
-        // }
+        var dateRange = { 
+          from: now.subtract(12, 'hours')._d,
+          to: now._d,
+          unit: 'hour'
+        }
         var dateRange = _.extend(dateRange, {unit: 'hour'});
         console.log(dateRange);
         if (eventName) {
-          MP.api.people().done(function(results) {
-            // eventGraph.MPChart('setData', results);
-            data = [];
-            for (var obj in results.values().results) {
-              person = {'distinct_id:': obj.$distinct_id};
-              for (var prop in obj.$properties) {
-                data[prop] = obj.$properties[prop];
-              }
-              data.push(obj);
-            }
-            console.log(data);
-            eventTable.MPTable('setData', data);
+          MP.api.segment().done(function(results) {
+            eventGraph.MPChart('setData', results);
+            // data = [];
+            // for (var obj in results.values().results) {
+            //   person = {'distinct_id:': obj.$distinct_id};
+            //   for (var prop in obj.$properties) {
+            //     data[prop] = obj.$properties[prop];
+            //   }
+            //   data.push(obj);
+            // }
+            // console.log(data);
+            // eventTable.MPTable('setData', data);
           });
         }
       };
